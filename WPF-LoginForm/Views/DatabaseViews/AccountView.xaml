@@ -1,0 +1,240 @@
+﻿<UserControl x:Class="WPF_LoginForm.Views.AccountView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPF_LoginForm.Views" xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="120"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Top"
+                        Grid.Column="0">
+                <fa:IconImage Icon="Search" Height="20" Width="20" Foreground="{StaticResource plainTextColor3}"/>
+
+                <TextBox Text="Search..."   
+                    FontSize="13"
+                         Height="24"
+                           Width="300"
+                           Background="Transparent"
+                             FontWeight="Medium"
+                             FontFamily="Montserrat"                            
+                             Foreground="{StaticResource plainTextColor3}"
+                             CaretBrush="{StaticResource plainTextColor3}"
+                             BorderBrush="{StaticResource plainTextColor3}"
+                             BorderThickness="0,0,0,1"                             
+                             VerticalContentAlignment="Center"
+                             Margin="5,5,0,0"></TextBox>
+
+            </StackPanel>
+
+            <Button Grid.Column="1"
+                            Command="{Binding LoginCommand}"                            
+                            Content="Search"                            
+                            FontSize="12"
+                            FontFamily="Montserrat"
+                            Cursor="Hand"
+                            BorderThickness="0"
+                            Foreground="White"
+                    VerticalAlignment="Top">
+
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#773DFF"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Height="30"
+                                                    CornerRadius="15"
+                                                    Background="{TemplateBinding Background}">
+                                        <ContentPresenter VerticalAlignment="Center"
+                                                                      HorizontalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#836EFB"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </Grid>
+        <Grid 
+            Grid.Row="1"
+                Background="#200F53">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="220"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <Label Content="Username." HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" Width="118" Height="21" FontWeight="Medium"
+                FontFamily="Montserrat" 
+                Foreground="{StaticResource plainTextColor3}" Grid.Column="1"/>
+                <TextBox x:Name="UsernameUser" HorizontalAlignment="Left" Height="21" Margin="10,10" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="181" RenderTransformOrigin="0.842,0.446" FontWeight="Medium"
+                FontFamily="Montserrat" 
+                Foreground="{StaticResource plainTextColor3}" Grid.Column="1"/>
+                <Label Content="Password" HorizontalAlignment="Left" Margin="10" VerticalAlignment="Top" Width="118" Height="21" FontWeight="Medium"
+                FontFamily="Montserrat" 
+                Foreground="{StaticResource plainTextColor3}" Grid.Column="1"/>
+                <TextBox x:Name="PasswordUser" HorizontalAlignment="Left" Margin="10,10" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="181" Height="20" RenderTransformOrigin="0.842,0.446" FontWeight="Medium"
+                FontFamily="Montserrat" 
+                Foreground="{StaticResource plainTextColor3}" Grid.Column="1"/>
+            </StackPanel>
+
+            <DataGrid  Grid.Column="1"
+                       Margin="16,10,4,10"
+                       x:Name="AccountDataGrid" 
+                       ColumnWidth="*"
+                       ItemsSource="{Binding Path=userModelList}"
+                       Background="#200F53"
+                       BorderThickness="0">
+
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="#BCBEE0"/>
+                        <Setter Property="Padding" Value="10,0,0,10"/>
+                        <Setter Property="FontFamily" Value="Montserrat"/>
+                        <Setter Property="FontSize" Value="10"/>
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id"
+                                        Binding="{Binding Path=Id_developers}"/>
+                    <DataGridTextColumn Header="Username"
+                                        Binding="{Binding Path=Username}" />
+                    <DataGridTextColumn Header="Password"
+                                        Binding="{Binding Path=Password}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="AddUser" Grid.Column="0"
+                            Command="{Binding LoginCommand}"                            
+                            Content="Add"                            
+                            FontSize="12"
+                            FontFamily="Montserrat"
+                            Cursor="Hand"
+                            BorderThickness="0"
+                            Foreground="White"
+                    VerticalAlignment="Top" Click="Button_AddUser">
+
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="Green"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Height="30"
+                                                    CornerRadius="15"
+                                                    Background="{TemplateBinding Background}">
+                                        <ContentPresenter VerticalAlignment="Center"
+                                                                      HorizontalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#836EFB"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button x:Name="EditUser" Grid.Column="1"
+                            Command="{Binding LoginCommand}"                            
+                            Content="Edit"                            
+                            FontSize="12"
+                            FontFamily="Montserrat"
+                            Cursor="Hand"
+                            BorderThickness="0"
+                            Foreground="White"
+                    VerticalAlignment="Top" Click="Button_EditUser">
+
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="Orange"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Height="30"
+                                                    CornerRadius="15"
+                                                    Background="{TemplateBinding Background}">
+                                        <ContentPresenter VerticalAlignment="Center"
+                                                                      HorizontalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#836EFB"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button x:Name="DeleteUser" Grid.Column="2"
+                            Command="{Binding LoginCommand}"                            
+                            Content="Delete"                            
+                            FontSize="12"
+                            FontFamily="Montserrat"
+                            Cursor="Hand"
+                            BorderThickness="0"
+                            Foreground="White"
+                    VerticalAlignment="Top" Click="DeleteUser_Click">
+
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="Red"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Height="30"
+                                                    CornerRadius="15"
+                                                    Background="{TemplateBinding Background}">
+                                        <ContentPresenter VerticalAlignment="Center"
+                                                                      HorizontalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#836EFB"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+        </Grid>
+    </Grid>
+</UserControl>
